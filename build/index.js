@@ -3,7 +3,7 @@ var fs = Promise.promisifyAll(require('fs-extra'));
 var path = require('path');
 var xmldoc = require('xmldoc');
 
-exports.onCreate = function (api, app, config, cb) {
+exports.beforeAntBuild = function (api, app, config, cb) {
 
   var copyCustomRules = function (outpath) {
     var file = 'custom_rules.xml',
