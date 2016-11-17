@@ -1,0 +1,7 @@
+<!--START_PLUGINS_MANIFEST-->
+  <uses-permission android:name="android.permission.INTERNET" />
+<!--END_PLUGINS_MANIFEST-->
+<!--START_PLUGINS_APPLICATION-->
+  <meta-data android:name="io.fabric.ApiKey" android:value="" />
+<!--END_PLUGINS_APPLICATION-->
+

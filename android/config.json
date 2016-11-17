@@ -1,0 +1,10 @@
+{
+  "copyFiles": [
+    "CrashlyticsPlugin.java"
+  ],
+  "jars": [
+    "libs/hc-crashlytics-1.0.jar"
+  ],
+  "injectionXML": "manifest.xml",
+  "injectionXSL": "manifest.xsl"
+}
