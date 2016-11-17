@@ -8,16 +8,19 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.util.Log;
 
 import com.tealeaf.plugin.IPlugin;
 import com.tealeaf.logger;
 
 import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.core.CrashlyticsCore;
 import io.fabric.sdk.android.Fabric;
-import io.fabric.sdk.android.BuildConfig;
 
 public class CrashlyticsPlugin implements IPlugin {
+
+  Activity _activity;
 
   public void onCreateApplication(Context applicationContext) {
 
@@ -33,6 +36,10 @@ public class CrashlyticsPlugin implements IPlugin {
     } else {
       return Log.INFO;
     }
+  }
+
+  private boolean isDebuggable() {
+    return 0 != (_activity.getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE);
   }
 
   public void setUserData(String jsonParams) {
@@ -75,8 +82,13 @@ public class CrashlyticsPlugin implements IPlugin {
 
   public void onCreate(Activity activity, Bundle savedInstanceState) {
     logger.log("{crashlytics} registeriing crashlytics");
-    Fabric.with(activity, new Crashlytics());
-    logger.log("{crashlytics} oncreate end.....");
+
+    _activity = activity;
+
+    Crashlytics crashlyticsKit = new Crashlytics.Builder()
+      .core(new CrashlyticsCore.Builder().disabled(isDebuggable()).build())
+      .build();
+    Fabric.with(activity, crashlyticsKit);
   }
 
   public void onResume() {
