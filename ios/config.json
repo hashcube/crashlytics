@@ -1,0 +1,29 @@
+{
+  "code": [
+    "CrashlyticsPlugin.h",
+    "CrashlyticsPlugin.mm"
+  ],
+  "frameworks": [
+    "Crashlytics.framework",
+    "Fabric.framework"
+  ],
+  "additionalLinkerFlags": [
+    "-ObjC"
+  ],
+  "userDefined": [
+    "APIKey"
+  ],
+  "plist": {
+    "Fabric": {
+      "APIKey": "$(crashlytics.APIKey)",
+      "Kits": [
+        {
+          "KitInfo": {}
+        },
+        {
+          "KitName": "Crashlytics"
+        }
+      ]
+    }
+  }
+}
