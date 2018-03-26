@@ -28,7 +28,7 @@ exports.onCreateProject = function (api, app, config, cb) {
       scriptContent = fs.readFileSync(buildScipt, "utf-8");
 
     return fs.outputFileAsync(path.join(outputPath, "resources/extra"),
-      scriptContent.toString() + manifest.crashlytics_key + " " + manifest.crashlytics_extra_key,'utf-8')
+      scriptContent.toString() + manifest.crashlyticsKey + " " + manifest.crashlyticsExtraKey,'utf-8')
       .then(cb);
   }
 };
