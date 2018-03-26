@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <xsl:param name="crashlytics_key" />
+  <xsl:param name="crashlyticsKey" />
 
   <xsl:output indent="yes" />
   <xsl:template match="comment()" />
 
   <xsl:template match="meta-data[@android:name='io.fabric.ApiKey']">
-    <meta-data android:name="io.fabric.ApiKey" android:value="{$crashlytics_key}" />
+    <meta-data android:name="io.fabric.ApiKey" android:value="{$crashlyticsKey}" />
   </xsl:template>
 
   <xsl:output indent="yes" />
