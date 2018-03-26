@@ -9,7 +9,7 @@ exports.onCreateProject = function (api, app, config, cb) {
   copyCustomRules = function (outpath) {
     var file = 'custom_rules.xml',
       srcPath = path.join(__dirname, '../android', file),
-      buildXml = fs.readFileSync(srcPath, "utf-8"),
+      buildXml = fs.readFileSync(srcPath, 'utf-8'),
       xmlDoc = new xmldoc.XmlDocument(buildXml);
 
     xmlDoc.attr.name = app.manifest.shortName;
@@ -23,12 +23,14 @@ exports.onCreateProject = function (api, app, config, cb) {
     return copyCustomRules(outputPath)
       .then(cb);
   } else if (config.target === 'native-ios') {
-    var buildScipt = path.join(__dirname, '../ios', "buildScript"),
+    var buildScipt = path.join(__dirname, '../ios', 'buildScript'),
       manifest = app.manifest.ios,
-      scriptContent = fs.readFileSync(buildScipt, "utf-8");
+      scriptContent = fs.readFileSync(buildScipt, 'utf-8');
 
-    return fs.outputFileAsync(path.join(outputPath, "resources/extra"),
-      scriptContent.toString() + manifest.crashlyticsKey + " " + manifest.crashlyticsExtraKey,'utf-8')
-      .then(cb);
+    outputPath = path.join(outputPath, 'xcodeproject');
+    return fs.outputFileAsync(path.join(outputPath, 'resources', 'extra'),
+      scriptContent.toString() + ' ' +manifest.crashlyticsKey +
+        ' ' + manifest.crashlyticsExtraKey, 'utf-8')
+        .then(cb);
   }
 };
