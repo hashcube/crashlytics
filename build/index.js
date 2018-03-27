@@ -29,8 +29,8 @@ exports.onCreateProject = function (api, app, config, cb) {
 
     outputPath = path.join(outputPath, 'xcodeproject');
     return fs.outputFileAsync(path.join(outputPath, 'resources', 'extra'),
-      scriptContent.toString() + ' ' +manifest.crashlyticsKey +
-        ' ' + manifest.crashlyticsExtraKey, 'utf-8')
+      scriptContent.toString() + ' ' + manifest.crashlyticsKey +
+        ' ' + manifest.crashlyticsBuildSecret, 'utf-8')
         .then(cb);
   }
 };
