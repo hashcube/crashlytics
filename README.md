@@ -9,4 +9,4 @@ android:
 
 ios:
 - build script is a template for build phases in xcode project.
-- Specify *crashlyticsBuildSecret* and *crashlyticsKey* in your devkit project manifest
+- Specify **crashlyticsBuildSecret** and **crashlyticsKey** in your devkit project manifest
