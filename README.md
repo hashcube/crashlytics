@@ -6,3 +6,7 @@ android:
 - These jar files are obtained by integrating crashlytic to a sample android project using android studio.
 - devtool is required since we are using ant build (https://www.fabric.io/downloads/ant).
 - We need to add custom rules defined by devtool for ant build. This is done by onCreateProject hook.
+
+ios:
+- build script is a template for build phases in xcode project.
+- Specify *crashlyticsBuildSecret* and *crashlyticsKey* in your devkit project manifest
