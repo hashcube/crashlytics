@@ -27,7 +27,7 @@ exports.onCreateProject = function (api, app, config, cb) {
       manifest = app.manifest.ios,
       scriptContent = fs.readFileSync(buildScipt, 'utf-8');
 
-    outputPath = path.join(outputPath, 'xcodeproject');
+    outputPath = config.xcodeProjectPath;
     return fs.outputFileAsync(path.join(outputPath, 'resources', 'extra'),
       scriptContent.toString() + ' ' + manifest.crashlyticsKey +
         ' ' + manifest.crashlyticsBuildSecret, 'utf-8')
