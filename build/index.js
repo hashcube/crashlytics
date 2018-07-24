@@ -20,8 +20,7 @@ exports.onCreateProject = function (api, app, config, cb) {
   };
 
   if (config.target === 'native-android') {
-    return copyCustomRules(outputPath)
-      .then(cb);
+    return cb;
   } else if (config.target === 'native-ios') {
     var buildScipt = path.join(__dirname, '../ios', 'buildScript'),
       manifest = app.manifest.ios,

@@ -15,15 +15,23 @@ import com.tealeaf.plugin.IPlugin;
 import com.tealeaf.logger;
 
 import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.core.CrashlyticsCore;
 import io.fabric.sdk.android.Fabric;
+
 
 public class CrashlyticsPlugin implements IPlugin {
 
   Activity _activity;
 
   public void onCreateApplication(Context applicationContext) {
+    logger.log("{crashlytics} registeriing crashlytics");
+      Fabric.Builder fb = new Fabric.Builder(applicationContext)
+            .kits(new Crashlytics());
 
+    if (isDebuggable()) {
+      fb.debuggable(true);
+    }
+    Fabric fabric = fb.build();
+    Fabric.with(fabric);
   }
 
   private int getLogLevel(String level) {
@@ -81,14 +89,10 @@ public class CrashlyticsPlugin implements IPlugin {
   }
 
   public void onCreate(Activity activity, Bundle savedInstanceState) {
-    logger.log("{crashlytics} registeriing crashlytics");
 
     _activity = activity;
 
-    Crashlytics crashlyticsKit = new Crashlytics.Builder()
-      .core(new CrashlyticsCore.Builder().disabled(isDebuggable()).build())
-      .build();
-    Fabric.with(activity, crashlyticsKit);
+
   }
 
   public void onResume() {

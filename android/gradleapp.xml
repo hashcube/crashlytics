@@ -1,0 +1,4 @@
+//<!--START_ANDROID_PLUGINS-->
+	//<!-- Crashlytics Fabric Plugin-->
+	apply plugin: 'io.fabric'
+//<!--END_ANDROID_PLUGINS-->
