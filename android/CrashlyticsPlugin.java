@@ -20,18 +20,23 @@ import io.fabric.sdk.android.Fabric;
 
 public class CrashlyticsPlugin implements IPlugin {
 
-  Activity _activity;
+  Context _activity;
 
   public void onCreateApplication(Context applicationContext) {
-    logger.log("{crashlytics} registeriing crashlytics");
+    _activity = applicationContext;
+    try {
+      logger.log("{crashlytics} registeriing crashlytics");
       Fabric.Builder fb = new Fabric.Builder(applicationContext)
             .kits(new Crashlytics());
 
-    if (isDebuggable()) {
-      fb.debuggable(true);
+      if (isDebuggable()) {
+        fb.debuggable(true);
+      }
+      Fabric fabric = fb.build();
+      Fabric.with(fabric);
+    } catch (Exception e) {
+      logger.log("{crashlytics} registering failed: " + e.getMessage());
     }
-    Fabric fabric = fb.build();
-    Fabric.with(fabric);
   }
 
   private int getLogLevel(String level) {
@@ -74,6 +79,8 @@ public class CrashlyticsPlugin implements IPlugin {
       }
     } catch (JSONException e) {
       logger.log("{crashlytics} setUserdata - failure: " + e.getMessage());
+    } catch (Exception e) {
+      logger.log("{crashlytics} setUserdata - failure: " + e.getMessage());
     }
   }
 
@@ -89,10 +96,6 @@ public class CrashlyticsPlugin implements IPlugin {
   }
 
   public void onCreate(Activity activity, Bundle savedInstanceState) {
-
-    _activity = activity;
-
-
   }
 
   public void onResume() {
